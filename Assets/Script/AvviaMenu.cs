@@ -16,8 +16,4 @@ public class AvviaMenu : MonoBehaviour
         SceneManager.LoadScene("BasicScene");
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 }

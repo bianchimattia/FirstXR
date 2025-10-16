@@ -20,22 +20,31 @@ public class BauleSpawn : MonoBehaviour
         // lato destra della stanza
         for (int i = 0; i < 2; i++)
         {
+            bool isBaule = false;
             float x = -7.989f;
             float z = UnityEngine.Random.Range(-14.202f, -6.66f);
             float y = 0.3f;
 
             Vector3 newVector = new Vector3(x, y, z);
 
-            if (!vectorList.Contains(newVector))
+            foreach (Vector3 v in vectorList)
             {
-                vectorList.Add(newVector);
+                if (Vector3.Distance(v, newVector) < 0.5f) 
+                {
+                    isBaule = true;
+                    break;
+                }
             }
 
 
-            pos_baule = newVector;
-            Instantiate(baule, pos_baule, Quaternion.identity);
-            coinPos = pos_baule + new Vector3(0.45f, 0.09f, 0);
-            Instantiate(coin, coinPos, Quaternion.Euler(0, 0, -90));
+            if (!isBaule)
+            {
+                vectorList.Add(newVector);
+                pos_baule = newVector;
+                Instantiate(baule, pos_baule, Quaternion.identity);
+                coinPos = pos_baule + new Vector3(0.45f, 0.09f, 0);
+                Instantiate(coin, coinPos, Quaternion.Euler(0, 0, -90));
+            }
         }
 
         // lato sinistra della stanza
@@ -46,11 +55,6 @@ public class BauleSpawn : MonoBehaviour
             float y = 0.3f;
 
             Vector3 newVector = new Vector3(x, y, z);
-
-            if (!vectorList.Contains(newVector))
-            {
-                vectorList.Add(newVector);
-            }
 
 
             pos_baule = newVector;
